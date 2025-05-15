@@ -11,6 +11,7 @@ public class Mavenproject3 extends JFrame implements Runnable {
     private int width;
     private BannerPanel bannerPanel;
     private JButton addProductButton;
+    private JButton sellProductButton;
     private List<Product> productList = new ArrayList<>();
 
     public Mavenproject3() {
@@ -35,12 +36,21 @@ public class Mavenproject3 extends JFrame implements Runnable {
 
         // Tombol "Kelola Produk"
         JPanel bottomPanel = new JPanel();
+
         addProductButton = new JButton("Kelola Produk");
         bottomPanel.add(addProductButton);
         add(bottomPanel, BorderLayout.SOUTH);
         
+        sellProductButton = new JButton("Jual Produk");
+        bottomPanel.add(sellProductButton);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         addProductButton.addActionListener(e -> {
             new ProductForm(this).setVisible(true);
+        });
+
+        sellProductButton.addActionListener(e -> {
+            new SellForm(this).setVisible(true);
         });
 
         setVisible(true);

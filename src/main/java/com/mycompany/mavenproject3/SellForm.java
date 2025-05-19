@@ -33,7 +33,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
 public class SellForm extends JFrame {
-    private JComboBox<String> productComboBox;
+    private JComboBox<String> productField;
     private JTextField stockField;
     private JTextField priceField;
     private JTextField qtyField;
@@ -59,12 +59,12 @@ public class SellForm extends JFrame {
         gbc.gridx = 0; gbc.gridy = 0;
         sellPanel.add(new JLabel("Barang:"), gbc);
 
-        productComboBox = new JComboBox<>();
+        productField = new JComboBox<>();
         for (Product p : products) {
-            productComboBox.addItem(p.getName());
+            productField.addItem(p.getName());
         }
         gbc.gridx = 1;
-        sellPanel.add(productComboBox, gbc);
+        sellPanel.add(productField, gbc);
 
         // Stok
         gbc.gridx = 0; gbc.gridy = 1;
@@ -100,13 +100,13 @@ public class SellForm extends JFrame {
         add(sellPanel);
 
         // Listener: Update stok dan harga saat produk dipilih
-        productComboBox.addActionListener(e -> updateFields());
+        productField.addActionListener(e -> updateFields());
 
         // Listener: Tombol Proses
         processButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedIndex = productComboBox.getSelectedIndex();
+                int selectedIndex = productField.getSelectedIndex();
                 Product selectedProduct = products.get(selectedIndex);
                 try {
                     int qty = Integer.parseInt(qtyField.getText());
@@ -136,13 +136,13 @@ public class SellForm extends JFrame {
 
         // Set nilai awal dari produk pertama
         if (!products.isEmpty()) {
-            productComboBox.setSelectedIndex(0);
+            productField.setSelectedIndex(0);
             updateFields();
         }
     }
 
     private void updateFields() {
-        int selectedIndex = productComboBox.getSelectedIndex();
+        int selectedIndex = productField.getSelectedIndex();
         if (selectedIndex != -1) {
             Product selectedProduct = products.get(selectedIndex);
             stockField.setText(String.valueOf(selectedProduct.getStock()));

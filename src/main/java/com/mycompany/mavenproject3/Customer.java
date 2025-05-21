@@ -13,7 +13,7 @@ public class Customer {
     private String name;
     private boolean gender;
 
-    public Customer(int id, String name) {
+    public Customer(int id, String name, Boolean gender) {
         this.id = id;
         this.name = name;
         this.gender = gender;

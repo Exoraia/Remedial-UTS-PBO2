@@ -53,7 +53,7 @@ public class ProductForm extends JFrame {
 
         setTitle("WK. Cuan | Stok Barang");
         setSize(600, 450);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         
         // Panel form pemesanan
@@ -98,7 +98,6 @@ public class ProductForm extends JFrame {
         JScrollPane scrollPane = new JScrollPane(drinkTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        
         saveButton.addActionListener(e -> {
             int selectedRow = drinkTable.getSelectedRow();
             String code = codeField.getText();

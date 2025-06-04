@@ -11,8 +11,10 @@ public class Mavenproject3 extends JFrame implements Runnable {
     private int width;
     private BannerPanel bannerPanel;
     private JButton addProductButton;
+    private JButton addCustomerButton;
     private JButton sellProductButton;
     private List<Product> productList = new ArrayList<>();
+    private List<Customer> customerList = new ArrayList<>();
 
     public Mavenproject3() {
         setTitle("WK. STI Chill");
@@ -27,6 +29,8 @@ public class Mavenproject3 extends JFrame implements Runnable {
         productList.add(new Product(4, "P004", "Matcha Frappucino", "Tea", 28000, 10));
         productList.add(new Product(5, "P005", "Jus Apel", "Juice", 17000, 10));
         
+        customerList.add(new Customer(1, "Andru", "email@email.com", "Admin123", true));
+
         this.text = getBannerTextFromProducts();
         this.x = -getFontMetrics(new Font("Arial", Font.BOLD, 18)).stringWidth(text);
 
@@ -41,6 +45,10 @@ public class Mavenproject3 extends JFrame implements Runnable {
         bottomPanel.add(addProductButton);
         add(bottomPanel, BorderLayout.SOUTH);
         
+        addCustomerButton = new JButton("Kelola Customer");
+        bottomPanel.add(addCustomerButton);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         sellProductButton = new JButton("Jual Produk");
         bottomPanel.add(sellProductButton);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -49,6 +57,9 @@ public class Mavenproject3 extends JFrame implements Runnable {
             new ProductForm(this).setVisible(true);
         });
 
+        addCustomerButton.addActionListener(e -> {
+            new CustomerForm(this).setVisible(true);
+        });
         sellProductButton.addActionListener(e -> {
             new SellForm(this).setVisible(true);
         });
@@ -77,9 +88,11 @@ public class Mavenproject3 extends JFrame implements Runnable {
     public String getBannerTextFromProducts() {
         StringBuilder sb = new StringBuilder("Menu yang tersedia: ");
         for (int i = 0; i < productList.size(); i++) {
-            sb.append(productList.get(i).getName());
-            if (i < productList.size() - 1) {
-                sb.append(" | ");
+            if (productList.get(i).getStock() > 0) {
+                sb.append(productList.get(i).getName());
+                if (i < productList.size() - 1) {
+                    sb.append(" | ");
+                }
             }
         }
         return sb.toString();
@@ -93,6 +106,9 @@ public class Mavenproject3 extends JFrame implements Runnable {
         return productList;
     }
 
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
 
     @Override
     public void run() {
